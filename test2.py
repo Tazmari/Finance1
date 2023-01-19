@@ -136,19 +136,23 @@ st.line_chart(df[['Close','SMA','SMA-5%','SMA+5%']])
 sma5_list = df['SMA-5%']
 sma5_last = round(sma5_list[-1],2)
 
+
+#thisdict = dict(sma5_price='')
+
 for ticker_list_items in ticker_list:
         ticker_list_objects = yf.Ticker(ticker_list_items)
-
         current_price_df = ticker_list_objects.history(start=start_date, end=end_date)
         price2 = round(current_price_df['Close'].iloc[-1],2)
         price2
-
         current_price_df2 = ticker_list_objects.history(start=start_date, end=end_date)
         current_price_df2['SMA-5%'] = talib.SMA(current_price_df2['Close']*.95, timeperiod = 10)
         sma5_list2 = current_price_df2['SMA-5%']
         sma5_last2 = round(sma5_list2[-1],2)
-        sma5_last
-thisdict = dict(name = ticker_list, price_now = price2, sma5_list = sma5_last)
-print(thisdict)
-
-thisdict
+        sma5_last2
+        c = dict(zip(['ticker', 'price', 'sma5'], [ticker_list_items, price2,sma5_last2]))
+        c
+#thisdict=(ticker_list,price2,sma5_last2)
+#thisdict=dict([sma5_last2])
+#, price_now = price2, sma5_list = sma5_last)
+##print(thisdict)
+#thisdict
